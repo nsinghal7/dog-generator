@@ -4,17 +4,15 @@ import badImage from "../public/nik.jpg";
 import { get } from "../utilities";
 import "./DogViewer.css";
 
-class DogViewer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageLink: "",
-      loading: true,
-    };
-  }
+const { useState, useEffect } = React;
 
-  fetchDog = async () => {
-    const { breed } = this.props;
+const DogViewer = (props) => {
+  const [imageLink, setImageLink] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const fetchDog = async () => {
+    setLoading(true);
+    const { breed } = props;
 
     let link;
     try {
@@ -26,39 +24,17 @@ class DogViewer extends Component {
       link = badImage;
     }
 
-    this.setState({
-      imageLink: link,
-      loading: false,
-    });
+    setImageLink(link);
+    setLoading(false);
   };
 
-  componentDidMount() {
-    this.fetchDog();
-  }
+  useEffect(fetchDog, [props.breed, props.iteration]);
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.breed !== this.props.breed ||
-      prevProps.iteration != this.props.iteration
-    ) {
-      this.setState({
-        loading: true,
-      });
-      this.fetchDog();
-    }
-  }
-
-  render() {
-    const { imageLink, loading } = this.state;
-    return (
-      <div className="DogViewer-wrapper">
-        <img
-          className="DogViewer-img"
-          src={loading ? loadingImage : imageLink}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="DogViewer-wrapper">
+      <img className="DogViewer-img" src={loading ? loadingImage : imageLink} />
+    </div>
+  );
+};
 
 export default DogViewer;
