@@ -10,23 +10,23 @@ class App extends Component {
     super(props);
     this.state = {
       breed: "pembroke",
-      iteration: 0
+      iteration: 0,
     };
   }
 
-  onKeyDown = event => {
+  onKeyDown = (event) => {
     if (event.keyCode === 13) {
       // 13 is the enter key
       if (event.target.value === "") {
         // refresh the current dog if you just hit enter
         this.setState({
-          iteration: this.state.iteration + 1
+          iteration: this.state.iteration + 1,
         });
       } else {
         // load a new dog if you typed a breed
         this.setState({
           breed: event.target.value,
-          iteration: this.state.iteration + 1
+          iteration: this.state.iteration + 1,
         });
         event.target.value = "";
       }
@@ -42,7 +42,7 @@ class App extends Component {
         </label>
         <input onKeyDown={this.onKeyDown} id="dog-breed" autoComplete="off" />
         <GoodBoiMeter breed={breed} />
-        <DogViewer breed={breed} iteration={iteration} />
+        <DogViewer breeed={breed} iteration={iteration} />
       </div>
     );
   }
