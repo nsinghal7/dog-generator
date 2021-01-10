@@ -4,7 +4,7 @@
   "description": "",
   "main": "",
   "scripts": {
-    "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5000"
+    "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 7000"
   },
   "repository": {
     "type": "git",
