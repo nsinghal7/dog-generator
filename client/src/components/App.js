@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GoodBoiMeter from "./GoodBoiMeter";
 import DogViewer from "./DogViewer";
-import Card from "./Card";
+import wrapWithCard from "./Card";
 
 import "./App.css";
 import "../utilities.css";
@@ -42,12 +42,8 @@ class App extends Component {
           enter dog breed:
         </label>
         <input onKeyDown={this.onKeyDown} id="dog-breed" autoComplete="off" />
-        <Card>
-          <GoodBoiMeter breed={breed} />
-        </Card>
-        <Card>
-          <DogViewer breed={breed} iteration={iteration} />
-        </Card>
+        {wrapWithCard(<GoodBoiMeter breed={breed} />)}
+        {wrapWithCard(<DogViewer breed={breed} iteration={iteration} />)}
       </div>
     );
   }
