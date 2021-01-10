@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import loadingImage from "../public/dog_bed.jpg";
-import badImage from "../public/alex.jpg";
+import badImage from "../public/nik.jpg";
 import { get } from "../utilities";
 import "./DogViewer.css";
 
@@ -9,7 +9,7 @@ class DogViewer extends Component {
     super(props);
     this.state = {
       imageLink: "",
-      loading: true
+      loading: true,
     };
   }
 
@@ -28,7 +28,7 @@ class DogViewer extends Component {
 
     this.setState({
       imageLink: link,
-      loading: false
+      loading: false,
     });
   };
 
@@ -42,7 +42,7 @@ class DogViewer extends Component {
       prevProps.iteration != this.props.iteration
     ) {
       this.setState({
-        loading: true
+        loading: true,
       });
       this.fetchDog();
     }
