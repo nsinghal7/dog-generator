@@ -1,6 +1,8 @@
 import React, { Component, useState, useRef } from "react";
 import GoodBoiMeter from "./GoodBoiMeter";
 import DogViewer from "./DogViewer";
+import Card from "./Card";
+import useTimer from "./Timer";
 
 import "./App.css";
 import "../utilities.css";
@@ -9,6 +11,7 @@ const App = () => {
   const [breed, setBreed] = useState("pembroke");
   const [iteration, setIteration] = useState(0);
   const ref = useRef(null);
+  const timer = useTimer(1000);
 
   const onKeyDown = event => {
     if (event.keyCode === 13) {
@@ -31,8 +34,10 @@ const App = () => {
         enter dog breed:
       </label>
       <input ref={ref} onKeyDown={onKeyDown} id="dog-breed" autoComplete="off" />
-      <GoodBoiMeter breed={breed} />
-      <DogViewer breed={breed} iteration={iteration} />
+      <Card contents={<GoodBoiMeter breed={breed} />} />
+      <Card contents={<DogViewer breed={breed} iteration={iteration} />} />
+      Count: {timer}
+      Value of input updated 1/sec: {ref.current?.value};
     </div>
   );
 }
