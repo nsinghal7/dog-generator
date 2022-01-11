@@ -1,20 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import loadingImage from "../public/dog_bed.jpg";
-import badImage from "../public/nik.jpg";
+import badImage1 from "../public/claire.jpg";
+import badImage2 from "../public/daniel.jpg";
 import { get } from "../utilities";
 import "./DogViewer.css";
 
-class DogViewer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageLink: "",
-      loading: true,
-    };
-  }
+const DogViewer = (props) => {
+  const [imageLink, setImageLink] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  fetchDog = async () => {
-    const { breed } = this.props;
+  const fetchDog = async () => {
+    const { breed } = props;
 
     let link;
     try {
@@ -23,42 +19,26 @@ class DogViewer extends Component {
       );
       link = response.message;
     } catch {
-      link = badImage;
+      link = (Math.random() < 0.5) ? badImage1 : badImage2;
     }
 
-    this.setState({
-      imageLink: link,
-      loading: false,
-    });
+    setImageLink(link);
+    setLoading(false);
   };
 
-  componentDidMount() {
-    this.fetchDog();
-  }
+  useEffect(() => {
+    setLoading(true);
+    fetchDog();
+  }, [props.breed, props.iteration])
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.breed !== this.props.breed ||
-      prevProps.iteration != this.props.iteration
-    ) {
-      this.setState({
-        loading: true,
-      });
-      this.fetchDog();
-    }
-  }
-
-  render() {
-    const { imageLink, loading } = this.state;
-    return (
-      <div className="DogViewer-wrapper">
-        <img
-          className="DogViewer-img"
-          src={loading ? loadingImage : imageLink}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="DogViewer-wrapper">
+      <img
+        className="DogViewer-img"
+        src={loading ? loadingImage : imageLink}
+      />
+    </div>
+  );
 }
 
 export default DogViewer;
