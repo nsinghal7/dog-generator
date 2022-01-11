@@ -36,8 +36,7 @@ const App = () => {
       <input ref={ref} onKeyDown={onKeyDown} id="dog-breed" autoComplete="off" />
       <Card contents={<GoodBoiMeter breed={breed} />} />
       <Card contents={<DogViewer breed={breed} iteration={iteration} />} />
-      Count: {timer}
-      Value of input updated 1/sec: {ref.current?.value};
+      Count: {timer} and Value of input updated 1/sec: {ref.current?.value};
     </div>
   );
 }
