@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useRef } from "react";
 import GoodBoiMeter from "./GoodBoiMeter";
 import DogViewer from "./DogViewer";
 
@@ -8,6 +8,7 @@ import "../utilities.css";
 const App = () => {
   const [breed, setBreed] = useState("pembroke");
   const [iteration, setIteration] = useState(0);
+  const ref = useRef(null);
 
   const onKeyDown = event => {
     if (event.keyCode === 13) {
@@ -29,7 +30,7 @@ const App = () => {
       <label className="App-label" htmlFor="dog-breed">
         enter dog breed:
       </label>
-      <input onKeyDown={onKeyDown} id="dog-breed" autoComplete="off" />
+      <input ref={ref} onKeyDown={onKeyDown} id="dog-breed" autoComplete="off" />
       <GoodBoiMeter breed={breed} />
       <DogViewer breed={breed} iteration={iteration} />
     </div>
